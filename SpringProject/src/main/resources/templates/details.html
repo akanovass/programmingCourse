@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="contentPage">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+    <div class="row ">
+        <div class="col-6 ">
+            <div id="contact" class="contact" style="width: 500px">
+                <form th:action="@{'/updateprofileofadmin'}" method="post" style="margin-top: 45px">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">ID:</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               th:value="${u.id}" name="id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword2" class="form-label">Full name:</label>
+                        <input type="text" class="form-control" id="exampleInputPassword2" th:value="${u.fullName}"
+                               name="full_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="exampleInputPassword1" th:value="${u.email}"
+                               name="email">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: #181569;color: white">Save
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="col-6 mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <td colspan="2" style="color: #0891f8">COURSE</td>
+                        <td style="width: 7%;color: #0891f8">DEL</td>
+
+                        </thead>
+                        <tbody>
+                        <tr th:each="cour: ${u.courses}">
+                            <td th:text="${cour.name}" colspan="2" style="color: #0891f8"></td>
+                            <td style="width: 7%">
+                                <form th:action="@{'/unassigncourse'}" method="post">
+                                    <input type="hidden" name="course_id" th:value="${cour.id}">
+                                    <input type="hidden" name="student_id" th:value="${u.id}">
+                                    <button class="btn  btn-danger btn-sm ">-</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 ">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <td colspan="2" style="color: #0891f8">COURSE</td>
+                        <td style="width: 7%;color: #0891f8">ADD</td>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cour: ${courses}">
+                            <td th:text="${cour.name}" colspan="2" style="color: #0891f8"></td>
+                            <td>
+                                <form th:action="@{'/assigncourse'}" method="post">
+                                    <input type="hidden" name="course_id" th:value="${cour.id}">
+                                    <input type="hidden" name="student_id" th:value="${u.id}">
+                                    <button class="btn btn-success btn-sm">+</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="contentPage">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+    <div style="margin-top: 50px;width: 700px;margin-left: 250px;margin-bottom: 300px">
+    <form th:action="@{'/ozgertu'}" method="post">
+        <input type="hidden" name="course_id" th:value="${course.id}">
+        <div class="mb-3">
+        <label class="form-label">Course Name:</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" th:value="${course.name}" name="course_name">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Profession:</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" th:value="${course.content}" name="course_profession">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Description:</label>
+<!--        <input type="text" class="form-control" aria-describedby="emailHelp" th:value="${course.description}" name="course_description">-->
+
+                <textarea id="mytextarea"   class="form-control" th:value="${course.getDescription()}" th:text="${course.description}" name="course_description" style="height: 200px;width: 700px"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Course photo:</label>
+        <img th:src="${course.getPhoto()}" style="width: 200px;height: 200px">
+        <input type="text" name="course_photo" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Number of students:</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" th:value="${course.mesta}" name="num_students">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Level:</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" th:value="${course.lavel}" name="level">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Price:</label>
+        <input type="text" class="form-control" aria-describedby="emailHelp" th:value="${course.price}" name="course_price">
+    </div>
+    <div class="mb-3">
+        <label>Start date:</label>
+        <input type="date" class="form-control" th:value="${course.startDate}" name="start_date" >
+    </div>
+    <div class="mb-3">
+        <label>Finish date:</label>
+        <input type="date" class="form-control" th:value="${course.finishDate}" name="finish_date">
+    </div>
+    <div class="mb-3">
+        <label>TEACHER:</label>
+        <select class="form-select" aria-label="Default select example" name="teacher" >
+            <option  th:each="t: ${teachers}" th:value="${course.getTeacher()}" th:text="${t.name}" name="teacher" th:selected="${t.name}"></option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>SELECT DAYS FOR CLASSES</label>
+        <input type="text" name="days" class="form-control" th:value="${course.days}">
+    </div>
+        <div class="mb-3">
+        <div class="md-form mx-2 my-2">
+            <label for="inputMDEx1">Choose your time</label>
+            <input type="time" id="inputMDEx1" class="form-control" th:value="${course.startTime}" name="first_time" >
+            <input type="time" id="inputMDEx2" class="form-control" name="second_time" th:value="${course.finishTime}" style="margin-top: 8px">
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete
+        </button>
+    </form>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{'/delete_course'}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <input type="hidden" name="n_id" th:value="${course.id}">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

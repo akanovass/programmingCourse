@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="contentPage">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: 20px;background-color: #181569;color: white">
+        +Add topic
+    </button>
+    <table class="table table-striped table-hover">
+        <thead>
+            <td>NAME</td>
+            <td>DESCRIPTION</td>
+            <td>DETAILS</td>
+
+        </thead>
+        <tbody>
+        <tr th:each="t: ${topics}">
+            <td th:utext="${t.getTopic()}"></td>
+            <td th:utext="${t.getTopicDescription()}"></td>
+            <td>
+            <form th:action="@{'/task_details'}" method="post">
+                <input type="hidden" name="topic_id" th:value="${t.id}">
+                <input type="hidden" name="course_id" th:value="${c.id}">
+<!--                <input type="hidden" name="task_id" th:value="${task.id}">-->
+                <button class="btn  btn-sm btn-info ">DETAILS</button>
+            </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{'/add_topic'}" method="post">
+                <div class="modal-header">
+                    <input type="hidden" name="c_id" th:value="${c.id}">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Topic</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <label for="exampleInputPassword1" class="form-label">Topic name:</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="topic_name">
+                </div>
+                <div class="modal-body">
+                    <label for="exampleInputPassword1" class="form-label">Description:</label>
+                    <input type="text" class="form-control" id="exampleInputPassword2" name="topic_description">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

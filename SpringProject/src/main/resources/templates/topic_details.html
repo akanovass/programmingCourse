@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="contentPage">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        tinymce.init({
+            selector: '#textarea'
+        });
+    </script>
+    <form th:action="@{'save_topic'}" method="post">
+        <input type="hidden" name="topic_id" th:value="${topic.id}">
+        <input type="hidden" name="course_id" th:value="${courses.id}">
+        <div  style="margin-top: 100px;width: 800px;margin-left: 250px" >
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Topic Name:</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:value="${topic.topic}" name="topic_name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Topic description:</label>
+<!--            <input type="textarea" class="form-control" id="exampleInputPassword1" th:value="${topic.topicDescription}">-->
+            <textarea class="form-control" th:value="${topic.topicDescription}" id="textarea" th:text="${topic.topicDescription}" name="topic_description"></textarea>
+        </div>
+        <button type="submit" class="btn " style="background-color: #148757;color: white">Save</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#example">
+                Delete topic
+            </button>
+        </div>
+    </form>
+
+
+
+<!--    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#example" style="margin-top: 70px;margin-left: 250px">-->
+<!--        +Add task-->
+<!--    </button>-->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-top: 70px;margin-left: 250px">
+        +Add Task
+    </button>
+    <table class="table table-striped table-hover" style="margin-top: 20px;width: 800px;margin-left: 250px">
+        <thead>
+        <td>ID</td>
+        <td>TASK</td>
+        <td>DETAILS</td>
+
+        </thead>
+        <tbody>
+        <tr th:each="ta: ${task}">
+            <td th:utext="${ta.id}"></td>
+            <td th:utext="${ta.task}"></td>
+            <td>
+                <form th:action="@{'/totaskdetails'}" method="post">
+                    <input type="hidden" name="task_id" th:value="${ta.id}">
+                    <input type="hidden" name="course_id" th:value="${courses.id}">
+                    <input type="hidden" name="topic_id" th:value="${topic.id}">
+                    <button class="btn  btn-sm btn-info ">DETAILS</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="modal fade" id="example" tabindex="-1" aria-labelledby="example" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{'/delete_topic'}" method="post">
+                    <input type="hidden" name="topic_id" th:value="${topic.id}">
+                    <input type="hidden" name="course_id" th:value="${courses.id}">
+<!--                    <input type="hidden" name="taskId" th:value="${ta.id}">-->
+
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{'/addTask'}" method="post">
+                    <input type="hidden" name="topicId" th:value="${topic.id}">
+                    <input type="hidden" name="course_id" th:value="${courses.id}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabe">Add new task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="exampleInputEmail1" class="form-label">Task:</label>
+                        <input type="text" class="form-control" aria-describedby="emailHelp" name="task">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

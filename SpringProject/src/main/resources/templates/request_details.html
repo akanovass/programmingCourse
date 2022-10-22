@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+
+<div layout:fragment="contentPage">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <div style="margin-top: 20px">
+        <form th:action="@{'/save_request'}" method="post">
+            <input type="hidden" name="request_id" th:value="${request.id}">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Full name:</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="full_name" th:value="${request.name}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="exampleInputPassword1" name="email" th:value="${request.email}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Number phone:</label>
+                <input type="text" class="form-control" id="exampleInputPassword3" name="phone" th:value="${request.number}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Course:</label>
+                <input type="text" class="form-control" id="exampleInputPassword5" name="course_name" th:value="${request.courses.name}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Completed:</label>
+                <select class="form-select" aria-label="Default select example" name="completed">
+                    <option th:value="${true}" name="completed">Yes</option>
+                    <option th:value="${false}" name="completed">No</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</div>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="contentPage">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <div style="display: flex">
+        <div style="margin-right: 100px;margin-top: 100px">
+            <img th:src="${currentUser.photoProfile}" class="card-img-top" alt="..." style="width: 220px;height: 250px">
+        </div>
+        <div style="margin-top: 100px;width: 300px">
+        <form th:action="@{'/updateprofile'}" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address:</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" th:value="${currentUser.getEmail()}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Full name:</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" th:value="${currentUser.fullName}" name="full_name">
+            </div>
+
+            <button type="submit" class="btn btn-primary">UPDATE PROFILE</button>
+        </form>
+            <form th:action="@{'/updatephoto'}" method="post" style="margin-top: 40px">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Photo profile:</label>
+                    <input type="text" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp" name="photo">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">UPDATE PICTURE</button>
+            </form>
+<!--            <div class="mb-3">-->
+<!--                <form th:action="@{'/uploadavatar'}" method="post" enctype="multipart/form-data">-->
+<!--                    <img src="" class="my-3">-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="formFile" class="form-label">Choose picture</label>-->
+<!--                        <input class="form-control" type="file" id="formFile" name="user_ava">-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <button class="btn btn-success mt-2">Save</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+            <div style="margin-top: 40px">
+        <form th:action="@{'/updatepassword'}" method="post">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Old password:</label>
+                <input type="password" class="form-control" name="old_password">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">New password:</label>
+                <input type="password" class="form-control" name="new_password">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Retype password:</label>
+                <input type="password" class="form-control" name="retype_password">
+            </div>
+            <button type="submit" class="btn btn-primary">UPDATE PASSWORD</button>
+
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

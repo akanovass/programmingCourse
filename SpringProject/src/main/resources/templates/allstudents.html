@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+
+
+<div layout:fragment="contentPage">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <button type="button" class="btn btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #181569;color:white;margin-top: 15px">
+        +Add student
+    </button>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>FULL NAME</th>
+                        <th>DETAILS</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="u: ${users}">
+                        <td th:text="${u.id}"></td>
+                        <td th:text="${u.fullName}"></td>
+                        <td><a th:href="@{'/details?id='+${u.id}}" class="btn btn-info btn-sm" style="background-color:#181569;color: white">DETAILS</a></td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{'/tosignup'}" method="post">
+                        <div class="row">
+                            <div class="col-12">
+                                <labe>EMAIL:</labe>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="email" name="user_email" class="form-control" placeholder="Insert email......." required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <labe>PASSWORD:</labe>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <input type="password" name="user_password" class="form-control" placeholder="Insert password......." required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <labe>CONFIRM PASSWORD:</labe>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <input type="password" name="conf_user_password" class="form-control" placeholder="Insert confirm password......." required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <labe>FULL NAME :</labe>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <input type="text" name="full_name" class="form-control" placeholder="Insert full name......." required>
+                            </div>
+                        </div>
+<!--                        <div class="row mt-3">-->
+<!--                            <div class="col-12">-->
+<!--                                <button class="btn btn-success" type="submit">Add student</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add student</button>
+                </div>
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+</div>
+</div>
+</html>
