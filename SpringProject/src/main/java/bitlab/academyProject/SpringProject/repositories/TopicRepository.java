@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 public interface TopicRepository extends JpaRepository<Topics,Long> {
 
-
     List<Topics> getTopicsById(Long id);
 //    void deleteAllByTasks(List<Tasks> tasks);
 

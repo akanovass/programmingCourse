@@ -23,8 +23,4 @@ public class Tasks {
     private String task;
     private Date postDate;
 
-
-
-
-
 }

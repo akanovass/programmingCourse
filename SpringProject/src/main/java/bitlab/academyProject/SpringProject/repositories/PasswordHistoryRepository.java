@@ -12,6 +12,5 @@ import java.util.List;
 @Repository
 @Transactional
 public interface PasswordHistoryRepository extends JpaRepository<PasswordHistory,Long> {
-
 List<PasswordHistory> findAllByUser(AuthUser user);
 }

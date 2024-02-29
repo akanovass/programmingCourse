@@ -12,4 +12,5 @@ import java.util.List;
 @Transactional
 public interface TaskRepository extends JpaRepository<Tasks,Long> {
 
+
 }

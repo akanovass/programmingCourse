@@ -13,7 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Request {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -26,6 +26,7 @@ public class AuthUser implements UserDetails {
     private String password;
     private String fullName;
 
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AuthRole> roles;
 

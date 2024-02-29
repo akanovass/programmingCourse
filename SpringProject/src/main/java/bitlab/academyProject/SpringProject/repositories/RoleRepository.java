@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional
 public interface RoleRepository extends JpaRepository<AuthRole,Long> {
 
-
     AuthRole findByRole(String role);
 //    List<AuthUser> findUserByRole(String role);
 

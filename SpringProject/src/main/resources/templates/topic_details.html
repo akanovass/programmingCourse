@@ -10,6 +10,7 @@
             selector: '#textarea'
         });
     </script>
+
     <form th:action="@{'save_topic'}" method="post">
         <input type="hidden" name="topic_id" th:value="${topic.id}">
         <input type="hidden" name="course_id" th:value="${courses.id}">

@@ -10,5 +10,4 @@ import javax.transaction.Transactional;
 @Transactional
 public interface AnswerRepository extends JpaRepository<Answer,Long> {
 
-
 }

@@ -15,7 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class Answer {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

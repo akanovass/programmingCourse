@@ -13,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class PasswordHistory {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

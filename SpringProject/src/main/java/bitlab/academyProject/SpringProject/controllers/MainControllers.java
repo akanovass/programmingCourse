@@ -98,7 +98,6 @@ public class MainControllers {
         return "allrequest";
     }
 
-
     @GetMapping(value = "/update")
     @PreAuthorize("isAuthenticated()")
     public String updateProgile(Model model) {

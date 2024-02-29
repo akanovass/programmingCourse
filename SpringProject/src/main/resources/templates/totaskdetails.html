@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="contentPage">
+
+    <!-- Button trigger modal -->
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <div style="margin-top: 20px;width: 800px;margin-left: 250px">
+    <form th:action="@{'update_task'}" method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Task</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:value="${task.task}" name="task">
+            <input type="hidden" name="course_id" th:value="${course.id}">
+            <input type="hidden" name="task_id" th:value="${task.id}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete
+        </button>
+    </form>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{'delete_task'}" method="post">
+                <div class="modal-header">
+                    <input type="hidden" name="course_id" th:value="${course.id}">
+                    <input type="hidden" name="task_id" th:value="${task.id}">
+                    <input type="hidden" name="topic_id" th:value="${topic.id}">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

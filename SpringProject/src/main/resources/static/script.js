@@ -13,6 +13,7 @@ function test(){
         "height": activeWidthNewAnimHeight + "px",
         "width": activeWidthNewAnimWidth + "px"
     });
+
     $("#navbarSupportedContent").on("click","li",function(e){
         $('#navbarSupportedContent ul li').removeClass("active");
         $(this).addClass('active');

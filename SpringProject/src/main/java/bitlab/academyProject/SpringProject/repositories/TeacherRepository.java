@@ -10,4 +10,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface TeacherRepository extends JpaRepository<Teacher,Long> {
 
+
 }
